@@ -1,0 +1,34 @@
+{% extends "exams/index.html" %}
+{% block main %}
+<div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Start Data Entry</h1>
+          <table class="table table-hover">
+              <tr>
+                  
+                  <th>title</th>
+                  <th>image</th>
+                  <th>action</th>
+                </tr>
+                <tr>
+                    {% for q in ques %}
+                    <th>{{ q.title }}</th>
+                    <th>
+                            
+                        <img src="{{ q.img.url }}"  class="img-square" width="400" height="200" alt="{{ q.title }}">
+                    </th>
+                    <th>
+                        <a href="{{ q.get_absolute_url }}" class="btn btn-success">ADD</a>
+                    </th>
+                    
+                </tr>
+                {% endfor %}       
+                
+              
+              
+            </table>
+              
+              </div>
+      </div>
+
+{% endblock %}
