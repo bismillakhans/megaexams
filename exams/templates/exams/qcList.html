@@ -12,8 +12,8 @@
                   <th>text</th>
                   <th>action</th>
                 </tr>
-                <tr>
-                    {% for q in ques %}
+                {% for q in ques %}
+                <tr class={{ q.pk }}>
                     <th>{{ q.title }}</th>
                     <th>
                             
@@ -22,8 +22,12 @@
                     <th>{{ q.ocrtext }}</th>
                     <th>{{ q.text }}</th>
                     <th>
-                        <a href="#" class="btn btn-success">Approve</a>&nbsp;&nbsp; <a href="#" class="btn btn-danger">Remove</a>
-                    </th>
+                            <a href="{{ q.get_absolute_url_qc }}" class="btn btn-success">ADD</a>
+
+                            <form action="{% url 'exams:qcdelete' pk=q.pk %}" method="POST">
+                                    {% csrf_token %}
+                                        <input class="btn btn-default btn-danger" type="submit" value="Delete"/>
+                                </form>                    </th>
                     
                 </tr>
                 {% endfor %}       

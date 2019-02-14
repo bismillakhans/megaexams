@@ -2,7 +2,7 @@
 {% block main %}
 <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Enter Data Entry</h1>
+          <h1 class="display-4">Verify Data Entry</h1>
         
          
           <form method="post">{% csrf_token %}
@@ -15,18 +15,10 @@
           </form>
          
                    
-          <div id="preview_div"></div>
+       
               </div>
       </div>
-      <script>
-            $(document).ready(function(){
-              $("#id_text").keyup(function(event){ 
-                $("#preview_div").html($("#id_text").val());
-              }
-            );
-            }
-            );
-            </script>
+     
             
             
 

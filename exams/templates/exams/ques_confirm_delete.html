@@ -1,0 +1,17 @@
+{% extends "exams/index.html" %}
+{% block main %}
+<div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Delete  Entry</h1>
+        
+         
+          <form method="post">{% csrf_token %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+            <input type="submit" value="Confirm">
+        </form>
+                   
+              
+              </div>
+      </div>
+
+{% endblock %}

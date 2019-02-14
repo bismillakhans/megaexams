@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls import url
 from django.urls import path
 from . import views
 
@@ -24,9 +25,9 @@ urlpatterns = [
 path('index/', views.index, name='index'),
 path('deo/', views.deoList.as_view(), name='deo'),
 path('deo/<int:pk>', views.deoUpdate.as_view(), name='update'),
-path('qc/<int:pk>', views.approve_group, name='approved'),
-path('qc/<int:pk>', views.reject_group, name='reject'),
+path('qc/<int:pk>', views.qcUpdate.as_view(), name='qc_update'),
 path('qc/', views.qcList.as_view(), name='qc'),
-
+#path('qc/<int:pk>', views.QuesDeleteView.as_view(), name='qcdelete'),
+url(r'^qc/(?P<pk>\d+)/$', views.QuesDeleteView.as_view(), name='qcdelete'),
 
 ]
