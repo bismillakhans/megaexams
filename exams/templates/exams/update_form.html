@@ -7,6 +7,9 @@
          
           <form method="post">{% csrf_token %}
               <img src="{{ object.img.url }}" alt="{{ object.img.url }}" width="400" height="200">
+                <div />
+              <br>
+              <br>
               {{ form.as_p }}
               <input type="submit" value="Submit">
           </form>
@@ -14,5 +17,12 @@
               
               </div>
       </div>
+      <script>
+            $(document).ready(function(){
+              $("#id_text").keyup(function(event){ 
+                $("div").html("Key: " + event.which);
+              });
+            });
+            </script>
 
 {% endblock %}
