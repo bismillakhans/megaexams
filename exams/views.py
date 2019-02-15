@@ -17,25 +17,27 @@ class deoList(ListView):
     model = Ques
     template_name='exams/deoList.html'
     context_object_name = 'ques'
-    queryset = Ques.objects.filter(status=True)
+    queryset = Ques.objects.filter(status=True,corrected=False)
     ordering=['-post_date']
 
 class qcList(ListView):
     model = Ques
     template_name='exams/qcList.html'
+    queryset = Ques.objects.filter(status=True,verify=False)
     context_object_name = 'ques'
-    ordering=['-post_date']
+    ordering=['post_date']
 
 class deoUpdate(UpdateView):
     model = Ques
-    fields = ['ocrtext','text',]
+    fields = ['text','corrected']
     success_url = '/deo'
-    queryset = Ques.objects.filter(status=True)
+    queryset = Ques.objects.filter(status=True,corrected=False)
     template_name= 'exams/update_form.html'
 
 class qcUpdate(UpdateView):
     model = Ques
-    fields = ['status',]
+    fields = ['verify',]
+    queryset = Ques.objects.filter(status=True)
     success_url = '/qc'
     template_name= 'exams/qc_update_form.html'
 

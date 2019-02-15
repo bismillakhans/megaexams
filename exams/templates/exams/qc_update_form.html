@@ -4,7 +4,12 @@
         <div class="container">
           <h1 class="display-4">Verify Data Entry</h1>
         
-         
+          <div class="float-right">
+
+            <div class="panel panel-default">
+                <div class="panel-body">{{ object.text }}</div>
+              </div>
+          </div><br>
           <form method="post">{% csrf_token %}
               <img src="{{ object.img.url }}" alt="{{ object.img.url }}" width="400" height="200">
                 

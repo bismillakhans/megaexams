@@ -8,7 +8,7 @@
                   
                   <th>title</th>
                   <th>image</th>
-                  <th>text</th>
+                  <th>ocrtext</th>
                   <th>updated text</th>
                   <th>action</th>
                 </tr>
@@ -20,8 +20,9 @@
                         <img src="{{ q.img.url }}"  class="img-square" width="400" height="200" alt="{{ q.title }}">
                     </th>
             
+                    <th>{{ q.ocrtext }}</th>
                     <th>{{ q.text }}</th>
-                    <th>{{ q.ocrtext }}</th><th>
+                    <th>
                         
                             <a href="{{ q.get_absolute_url_qc }}" class="btn btn-success">Action</a>
                                     {% if q.status %}

@@ -5,7 +5,7 @@ from django.http import HttpResponse
 # Register your models here.
 @admin.register(Ques)
 class PostAdmin(admin.ModelAdmin):
-    fields = ('title','ocrtext','text','img','status')
+    fields = ('title','ocrtext','text','img','status','corrected','verify')
     actions= ['csv_download']
     def ocr_generate(self, request, queryset):
         data = Ques.objects.all().values_list()
