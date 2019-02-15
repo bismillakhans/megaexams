@@ -34,6 +34,12 @@ class deoUpdate(UpdateView):
     queryset = Ques.objects.filter(status=True,corrected=False)
     template_name= 'exams/update_form.html'
 
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if not self.object.corrected:
+            self.object.corrected=True
+        return super(deoUpdate, self).update(request, *args, **kwargs)
+
 class qcUpdate(UpdateView):
     model = Ques
     fields = ['verify',]

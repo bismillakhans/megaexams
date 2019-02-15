@@ -2,6 +2,9 @@ from django.db import models
 from django.shortcuts import reverse
 from django_extensions.db.fields import AutoSlugField,ModificationDateTimeField
 import pytesseract
+import json
+import base64
+import requests
 from PIL import Image, ImageEnhance, ImageFilter
 
 
