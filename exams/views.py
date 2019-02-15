@@ -24,12 +24,11 @@ class qcList(ListView):
     model = Ques
     template_name='exams/qcList.html'
     context_object_name = 'ques'
-    queryset = Ques.objects.filter(status=True)
     ordering=['-post_date']
 
 class deoUpdate(UpdateView):
     model = Ques
-    fields = ['text',]
+    fields = ['ocrtext','text',]
     success_url = '/deo'
     queryset = Ques.objects.filter(status=True)
     template_name= 'exams/update_form.html'
@@ -38,7 +37,6 @@ class qcUpdate(UpdateView):
     model = Ques
     fields = ['status',]
     success_url = '/qc'
-    queryset = Ques.objects.filter(status=True)
     template_name= 'exams/qc_update_form.html'
 
 class QuesDeleteView(DeleteView):
@@ -54,11 +52,7 @@ class QuesDeleteView(DeleteView):
         messages.success(self.request, message)
         return super(QuesDeleteView, self).delete(request, *args, **kwargs)
 
-def approve_group(request, pk):
-    ques = Ques.objects.get(pk=pk)
-    ques.status = False
-    ques.save()
-    return redirect(request, 'approved')
+
 
 
     

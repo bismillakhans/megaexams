@@ -1,0 +1,10 @@
+*.pyc
+*.py~
+__pycache__
+*.sqlite3
+.env
+staticfiles/
+mysite.log
+venv
+.idea/*
+media/

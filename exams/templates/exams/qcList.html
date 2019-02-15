@@ -8,8 +8,8 @@
                   
                   <th>title</th>
                   <th>image</th>
-                  <th>ocrtext</th>
                   <th>text</th>
+                  <th>updated text</th>
                   <th>action</th>
                 </tr>
                 {% for q in ques %}
@@ -19,15 +19,17 @@
                             
                         <img src="{{ q.img.url }}"  class="img-square" width="400" height="200" alt="{{ q.title }}">
                     </th>
-                    <th>{{ q.ocrtext }}</th>
+            
                     <th>{{ q.text }}</th>
-                    <th>
-                            <a href="{{ q.get_absolute_url_qc }}" class="btn btn-success">ADD</a>
-
+                    <th>{{ q.ocrtext }}</th><th>
+                        
+                            <a href="{{ q.get_absolute_url_qc }}" class="btn btn-success">Action</a>
+                                    {% if q.status %}
                             <form action="{% url 'exams:qcdelete' pk=q.pk %}" method="POST">
                                     {% csrf_token %}
                                         <input class="btn btn-default btn-danger" type="submit" value="Delete"/>
-                                </form>                    </th>
+                                </form>                         {% endif %}       
+           </th>
                     
                 </tr>
                 {% endfor %}       

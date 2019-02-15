@@ -7,11 +7,10 @@ from PIL import Image, ImageEnhance, ImageFilter
 
 # Create your models here.
 class Ques(models.Model):
-    title=models.CharField(max_length=70)
-    slug=AutoSlugField(populate_from='title', overwrite=True)
+    title=models.CharField(max_length=70 ,blank=True)
     img = models.ImageField(upload_to='images')
     text=models.TextField(max_length=250 ,blank=True)
-    ocrtext=models.CharField(max_length=70,blank=True)
+    ocrtext=models.TextField(max_length=250 ,blank=True)
     post_date = models.DateField(auto_now_add=True)
     status = models.BooleanField(default=True, verbose_name="Approve")
 
