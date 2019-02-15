@@ -21,7 +21,13 @@
                     </th>
             
                     <th>{{ q.ocrtext }}</th>
-                    <th>{{ q.text }}</th>
+                    <th>
+                        {% if q.corrected %}
+                            {{ q.text }}
+                          {% else %} 
+                           <font color="red">Not Corrected</font>
+                          {% endif %} 
+                    </th>
                     <th>
                         
                             <a href="{{ q.get_absolute_url_qc }}" class="btn btn-success">Action</a>

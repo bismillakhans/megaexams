@@ -3,21 +3,25 @@
 <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <h1 class="display-4">Verify Data Entry</h1>
-        
-          <div class="float-right">
+          <div class="row">
+              <div class="col-sm-4">
 
-            <div class="panel panel-default">
-                <div class="panel-body">{{ object.text }}</div>
+                  <form method="post">{% csrf_token %}
+                  <img src="{{ object.img.url }}" alt="{{ object.img.url }}" width="400" height="200">
+                    
+                  <br>
+                  <br>
+                  {{ form.as_p }}
+                  <input type="submit" value="Submit">
+              </form>
               </div>
-          </div><br>
-          <form method="post">{% csrf_token %}
-              <img src="{{ object.img.url }}" alt="{{ object.img.url }}" width="400" height="200">
-                
-              <br>
-              <br>
-              {{ form.as_p }}
-              <input type="submit" value="Submit">
-          </form>
+              <div class="col-sm-8" align="right">
+
+                {{ object.text }}
+              </div>
+            </div>
+
+          
          
                    
        
