@@ -1,11 +1,11 @@
 from django.db import models
 from django.shortcuts import reverse
 from django_extensions.db.fields import AutoSlugField,ModificationDateTimeField
-import pytesseract
-#import json
-#import base64
-#import requests
-from PIL import Image, ImageEnhance, ImageFilter
+#import pytesseract
+import json
+import base64
+import requests
+#from PIL import Image, ImageEnhance, ImageFilter
 
 
 # Create your models here.
@@ -17,6 +17,7 @@ class Ques(models.Model):
     text=models.TextField(max_length=1000 ,blank=True)
     ocrtext=models.TextField(max_length=1000 ,blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
+    #ocrstatus=models.BooleanField(default=False,verbose_name="ocr_genereted")
     status = models.BooleanField(default=True, verbose_name="Approve")
     verify = models.BooleanField(default=False, verbose_name="verify")
     corrected = models.BooleanField(default=False, verbose_name="corrected")
@@ -31,12 +32,24 @@ class Ques(models.Model):
         return reverse('exams:qc_update', args=[self.pk])
     
     def save(self, *args, **kwargs):
-        if self.img:
+        if self.img :
+            #image_uri = "data:image/jpg;base64," + base64.b64encode(open(file_path, "rb").read())
+            image_uri = "data:image/jpg;base64," + base64.b64encode(self.img.read()).decode()
+            r = requests.post("https://api.mathpix.com/v3/latex",
+            data=json.dumps({'src': image_uri,
+            'formats': ['latex_normal','text'],'ocr':['math','text']}),
+                headers={"app_id": "test_megaexams_gmail_com", "app_key": "901d0e8fc9080d1f86be",
+            "Content-type": "application/json"})
+            self.ocrtext=json.dumps(json.loads(r.text)['text'])
+            
+            
+            """
             im = Image.open(self.img)
             im = im.convert('L')                             # grayscale
             im = im.filter(ImageFilter.MedianFilter())       # a little blur
             im = im.point(lambda x: 0 if x < 140 else 255)
             self.ocrtext = pytesseract.image_to_string(im)
+            """
         if self.status:
             if not self.corrected:
                 self.text=self.ocrtext
