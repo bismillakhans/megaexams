@@ -1,11 +1,11 @@
 from django.db import models
 from django.shortcuts import reverse
 from django_extensions.db.fields import AutoSlugField,ModificationDateTimeField
-import pytesseract
+#import pytesseract
 #import json
 #import base64
 #import requests
-from PIL import Image, ImageEnhance, ImageFilter
+#from PIL import Image, ImageEnhance, ImageFilter
 
 
 # Create your models here.
@@ -30,7 +30,7 @@ class Ques(models.Model):
     def get_absolute_url_qc(self):
         return reverse('exams:qc_update', args=[self.pk])
     
-    def save(self, *args, **kwargs):
+    """ def save(self, *args, **kwargs):
         if self.img:
             im = Image.open(self.img)
             im = im.convert('L')                             # grayscale
@@ -42,6 +42,6 @@ class Ques(models.Model):
                 self.text=self.ocrtext
         super(Ques, self).save(*args, **kwargs)
 
-
+    """
     
 

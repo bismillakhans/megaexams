@@ -25,7 +25,7 @@ SECRET_KEY = 'uakjj1h=an^y)l49pe&c6w!f)d6c*)3%i@b!lb%my=$$4jd1v^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','139.59.64.34']
 
 
 # Application definition
@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'mega.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mega',
+	'USER':'u_bismi',
+	'PASSWORD':'12345',
+	'HOST':'localhost',
+	'PORT':'',
     }
 }
 
