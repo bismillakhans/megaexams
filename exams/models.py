@@ -27,9 +27,6 @@ class Ques(models.Model):
 
     def get_absolute_url(self):
         return reverse('exams:update', args=[self.pk])
-
-    def get_absolute_url_qc(self):
-        return reverse('exams:qc_update', args=[self.pk])
     
     def save(self, *args, **kwargs):
         if self.img :

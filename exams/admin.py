@@ -7,6 +7,7 @@ from django.http import HttpResponse
 class PostAdmin(admin.ModelAdmin):
     fields = ('title','ocrtext','text','img','status','corrected','verify')
     actions= ['csv_download']
+    list_display=['title','img','text','corrected','verify','status']
     def ocr_generate(self, request, queryset):
         data = Ques.objects.all().values_list()
         for s in data:

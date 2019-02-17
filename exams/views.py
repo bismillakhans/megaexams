@@ -23,7 +23,7 @@ class deoList(ListView):
 class qcList(ListView):
     model = Ques
     template_name='exams/qcList.html'
-    queryset = Ques.objects.filter(status=True,verify=False)
+    queryset = Ques.objects.filter(status=True,corrected=True)
     context_object_name = 'ques'
     ordering=['post_date']
 
@@ -31,7 +31,7 @@ class deoUpdate(UpdateView):
     model = Ques
     fields = ['text','corrected']
     success_url = '/deo'
-    queryset = Ques.objects.filter(status=True,corrected=False)
+    queryset = Ques.objects.filter(status=True)
     template_name= 'exams/update_form.html'
 
     def update(self, request, *args, **kwargs):
@@ -40,14 +40,28 @@ class deoUpdate(UpdateView):
             self.object.corrected=True
         return super(deoUpdate, self).update(request, *args, **kwargs)
 
-class qcUpdate(UpdateView):
+"""class qcUpdate(UpdateView):
     model = Ques
     fields = ['verify',]
     queryset = Ques.objects.filter(status=True)
     success_url = '/qc'
-    template_name= 'exams/qc_update_form.html'
+    template_name= 'exams/qc_update_form.html'"""
+    
+def approve_group(request, pk):
+    group = Ques.objects.get(pk=pk)
+    group.verify = True
+    group.corrected=True
+    group.save()
+    return redirect('/qc')
 
-class QuesDeleteView(DeleteView):
+def deny_group(request, pk):
+    dele = Ques.objects.get(pk=pk)
+    dele.corrected = False
+    dele.verify=False
+    dele.save()
+    return redirect('/qc')
+
+    """class QuesDeleteView(DeleteView):
     model = Ques
     success_url = '/qc'
     success_message = "'%(name)s'  deleted..."
@@ -59,7 +73,7 @@ class QuesDeleteView(DeleteView):
         message = 'Entry: ' + request.session['name'] + ' deleted successfully'
         messages.success(self.request, message)
         return super(QuesDeleteView, self).delete(request, *args, **kwargs)
-
+    """
 
 
 

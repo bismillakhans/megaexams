@@ -2,13 +2,12 @@
 {% block main %}
 <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Qc Control</h1>
+          <h1 class="display-4">QC Control</h1>
           <table class="table table-hover">
               <tr>
                   
                   <th>title</th>
                   <th>image</th>
-                  <th>ocrtext</th>
                   <th>updated text</th>
                   <th>action</th>
                 </tr>
@@ -20,7 +19,6 @@
                         <img src="{{ q.img.url }}"  class="img-square" width="400" height="200" alt="{{ q.title }}">
                     </th>
             
-                    <th>{{ q.ocrtext }}</th>
                     <th>
                         {% if q.corrected %}
                             {{ q.text }}
@@ -30,12 +28,16 @@
                     </th>
                     <th>
                         
-                            <a href="{{ q.get_absolute_url_qc }}" class="btn btn-success">Action</a>
-                                    {% if q.status %}
-                            <form action="{% url 'exams:qcdelete' pk=q.pk %}" method="POST">
+                            
+                            <form action="{% url 'exams:verify' pk=q.pk %}" method=POST>
+                                                     {% csrf_token %}
+                                        <input class="btn btn-default btn-success" type="submit" value="Approve"/>
+               </form>
+                                    
+                            <form action="{% url 'exams:reject' pk=q.pk %}" method=POST>
                                     {% csrf_token %}
-                                        <input class="btn btn-default btn-danger" type="submit" value="Delete"/>
-                                </form>                         {% endif %}       
+                                        <input class="btn btn-default btn-danger" type="submit" value="Reject"/>
+                                </form>                             
            </th>
                     
                 </tr>
