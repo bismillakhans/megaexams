@@ -30,23 +30,14 @@ class Ques(models.Model):
     
     def save(self, *args, **kwargs):
         if self.img :
-            #image_uri = "data:image/jpg;base64," + base64.b64encode(open(file_path, "rb").read())
-            image_uri = "data:image/jpg;base64," + base64.b64encode(self.img.read()).decode()
-            r = requests.post("https://api.mathpix.com/v3/latex",
-            data=json.dumps({'src': image_uri,
-            'formats': ['latex_normal','text'],'ocr':['math','text']}),
-                headers={"app_id": "test_megaexams_gmail_com", "app_key": "901d0e8fc9080d1f86be",
-            "Content-type": "application/json"})
-            self.ocrtext=json.dumps(json.loads(r.text)['text'])
             
-            
-            """
+    
             im = Image.open(self.img)
             im = im.convert('L')                             # grayscale
             im = im.filter(ImageFilter.MedianFilter())       # a little blur
             im = im.point(lambda x: 0 if x < 140 else 255)
             self.ocrtext = pytesseract.image_to_string(im)
-            """
+            
         if self.status:
             if not self.corrected:
                 self.text=self.ocrtext
